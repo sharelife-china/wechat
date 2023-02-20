@@ -9,6 +9,7 @@ import (
 	miniContext "github.com/silenceper/wechat/v2/miniprogram/context"
 	"github.com/silenceper/wechat/v2/miniprogram/urllink"
 	openContext "github.com/silenceper/wechat/v2/openplatform/context"
+	"github.com/silenceper/wechat/v2/openplatform/miniprogram/auth"
 	"github.com/silenceper/wechat/v2/openplatform/miniprogram/basic"
 	"github.com/silenceper/wechat/v2/openplatform/miniprogram/component"
 )
@@ -35,6 +36,13 @@ func (miniProgram *MiniProgram) GetAccessToken() (string, error) {
 		return "", akResErr
 	}
 	return akRes.AccessToken, nil
+}
+
+// GetAccessToken 获取ak
+func (miniProgram *MiniProgram) GetPlatformAuth() *auth.Auth {
+	fmt.Println("platform", miniProgram.AppID)
+	return auth.NewAuth(miniProgram.GetContext(), miniProgram.AppID)
+
 }
 
 // SetAuthorizerRefreshToken 设置代执操作业务授权账号authorizer_refresh_token
